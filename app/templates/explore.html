@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block app_content %}
+    <h1>{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
+    <h3> Community Topics</h3>
+    <!-- Code to go trough all the topic pages--> 
+    <ul> 
+    {% for topic in topics %}
+        
+        <li> <a href="{{ url_for('main.topic_page')}}">{{ topic.topic }}</a></li>
+        <li> {{ topic.topic }}</li>
+    {% endfor %}
+    </ul>
+
+    <!-- add a new topic page --> 
+    {% if form1 %}
+    {{ wtf.quick_form(form1) }}
+    <br>
+    {% endif %}
+
+<!--     <h3> All Posts</h3>
+    {% if form %}
+    {{ wtf.quick_form(form) }}
+    <br>
+    {% endif %}
+
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+    <nav aria-label="...">
+        <ul class="pager">
+            <li class="previous{% if not prev_url %} disabled{% endif %}">
+                <a href="{{ prev_url or '#' }}">
+                    <span aria-hidden="true">&larr;</span> {{ _('Newer posts') }}
+                </a>
+            </li>
+            <li class="next{% if not next_url %} disabled{% endif %}">
+                <a href="{{ next_url or '#' }}">
+                    {{ _('Older posts') }} <span aria-hidden="true">&rarr;</span>
+                </a>
+            </li>
+        </ul>
+    </nav> -->
+{% endblock %}
