@@ -9,7 +9,6 @@
     {% for topic in topics %}
         
         <li> <a href="{{ url_for('main.topic_page')}}">{{ topic.topic }}</a></li>
-        <li> {{ topic.topic }}</li>
     {% endfor %}
     </ul>
 
