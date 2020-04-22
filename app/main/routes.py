@@ -139,7 +139,7 @@ def unfollow(username):
     flash(_('You are not following %(username)s.', username=username))
     return redirect(url_for('main.user', username=username))
 
-@bp.route('/topics')
+@bp.route('/topics/sports')
 @login_required
 def topic_page():
     form = PostForm()
@@ -154,7 +154,8 @@ def topic_page():
         flash(_('Your post is now live!'))
         return redirect(url_for('main.index'))
     page = request.args.get('page', 1, type=int)
-    posts = current_user.followed_posts().paginate(
+    print(Post.query.order_by(Post.timestamp.desc()))
+    posts = Post.query.filter(Post.tag == 'sports').order_by(Post.timestamp.desc()).paginate(
         page, current_app.config['POSTS_PER_PAGE'], False)
     next_url = url_for('main.index', page=posts.next_num) \
         if posts.has_next else None
