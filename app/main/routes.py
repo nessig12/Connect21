@@ -20,7 +20,7 @@ def before_request():
 
 
 @bp.route('/', methods=['GET', 'POST'])
-@bp.route('/index', methods=['GET', 'POST'])
+@bp.route('/pages', methods=['GET', 'POST'])
 @login_required
 def index():
     form = PostForm()
@@ -46,6 +46,7 @@ def index():
                            prev_url=prev_url)
 
 @bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
 @bp.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('about.html', title=_('About'))
