@@ -31,6 +31,7 @@ class RegistrationForm(FlaskForm):
 class EditProfileForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
+    image = FileField(u'Image File', [validators.regexp(u'^[^/\\]\.jpg$')])
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, *args, **kwargs):
@@ -42,6 +43,16 @@ class EditProfileForm(FlaskForm):
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
                 raise ValidationError('Please use a different username.')
+
+    def validate_image(self, image):
+        if image.data:
+            image.data = re.sub(r'[^a-z0-9_.-]', '_', image.data)
+
+def upload(request):
+    form = UploadForm(request.POST)
+    if form.image.data:
+        image_data = request.FILES[form.image.name].read()
+        open(os.path.join(UPLOAD_PATH, form.image.data), 'w').write(image_data)
 
 class PostForm(FlaskForm):
     post = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])

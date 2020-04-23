@@ -45,6 +45,7 @@ def index():
                            posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
 
+@bp.route('/', methods=['GET', 'POST'])
 @bp.route('/about', methods=['GET', 'POST'])
 def about():
     return render_template('about.html', title=_('About'))
@@ -76,9 +77,19 @@ def explore():
                            prev_url=prev_url, form1=form1)
 
 
-@bp.route('/user/<username>')
+@bp.route('/user/<username>',methods=['GET', 'POST'])
 @login_required
 def user(username):
+    form = PostForm()
+    if form.validate_on_submit():
+        language = guess_language(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = Post(body=form.post.data, tag = form.tag.data,author=current_user,
+                    language=language)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(url_for('main.index'))
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = user.posts.order_by(Post.timestamp.desc()).paginate(
@@ -88,8 +99,7 @@ def user(username):
     prev_url = url_for('main.user', username=user.username,
                        page=posts.prev_num) if posts.has_prev else None
     return render_template('user.html', user=user, posts=posts.items,
-                           next_url=next_url, prev_url=prev_url)
-
+                           next_url=next_url, prev_url=prev_url, form=form)
 
 @bp.route('/edit_profile', methods=['GET', 'POST'])
 @login_required

@@ -1,72 +1,125 @@
-{% extends 'bootstrap/base.html' %}
-
-{% block title %}
-    {% if title %}{{ title }} - Connect21{% else %}{{ _('Welcome to Connect21') }}{% endif %}
-{% endblock %}
-
-{% block navbar %}
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url_for('main.index') }}"><img src="{{url_for('static', filename='21.png')}}" alt="Connect21" height="37" ></a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
-                    <li><a href="{{ url_for('main.about') }}"> {{_('About') }}</a></li>
-                    
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    {% if current_user.is_anonymous %}
-                    <li><a href="{{ url_for('auth.login') }}">{{ _('Login') }}</a></li>
-                    {% else %}
-                    <li><a href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
-                    <li><a href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li>
-                    <li><a href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </div>
-    </nav>
-{% endblock %}
-
-{% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-info" role="alert">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
-
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
-    </div>
-{% endblock %}
-
-{% block scripts %}
-    {{ super() }}
-    {{ moment.include_moment() }}
-    {{ moment.lang(g.locale) }}
-    <script>
-        function translate(sourceElem, destElem, sourceLang, destLang) {
-            $(destElem).html('<img src="{{ url_for('static', filename='loading.gif') }}">');
-            $.post('/translate', {
-                text: $(sourceElem).text(),
-                source_language: sourceLang,
-                dest_language: destLang
-            }).done(function(response) {
-                $(destElem).text(response['text'])
-            }).fail(function() {
-                $(destElem).text("{{ _('Error: Could not contact server.') }}");
-            });
+<html>
+<head> 
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <title>
+    {% if title %}{{ title }} - Connect21{% else %}{{ _('Connect21') }}{% endif %}
+    </title>
+    <style type="text/css">
+        body{
+            font-family: "Comic Sans MS", cursive, sans-serif;
         }
-    </script>
-{% endblock %}
+        .inout {
+            background: #f06377;
+            border-radius: 25px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-top: 5px;
+            float: right;
+        }
+        .title {
+            background-image:url({{ url_for('static', filename='gradient.jpg') }});
+            padding: 15px;
+        }
+        ul { 
+            list-style-type: none;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        li a {
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+          float: left; 
+        }
+        .nav { 
+            background-color: white;
+            height: 75px;
+        }
+        .textstuff { 
+            width: 375px;
+            padding: 100px;
+            margin-left: 20px;
+        }
+        .leftttextstuff { 
+            width: 200px;
+            padding: 50px;
+            margin-left: 20px;
+        }
+        .righttextstuff { 
+            width: 500px;
+            /*padding: 100px;
+            margin-left: 500px;*/
+            float: right;
+        }
+        .stuff{ 
+            height: 500px;
+            color: white; 
+            margin-top: 5px;
+            background-image: url({{ url_for('static', filename='gradient.jpg') }});
+        }
+        .theapp{ 
+            height: 450px;
+            color: white; 
+            margin-top: 5px;
+            background-image: url({{ url_for('static', filename='gradient.jpg') }});
+        }
+        .learn {
+            background: white;
+            padding: 10px;
+            border-radius: 25px;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            margin-top: 20px;
+            color:#f06377;
+        }
+        footer{ 
+            text-align: center;
+            height: 70px;
+            background-image: url({{ url_for('static', filename='gradient.jpg') }});
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="{{ url_for('main.about') }}"><img src="{{url_for('static', filename='21.png')}}" alt="Connect21"></a></li>
+
+            {% if current_user.is_anonymous %}
+            <li><a class="inout" href="{{ url_for('auth.login') }}">{{ _('Sign In') }}</a></li>
+            <li><a class="inout" href="{{ url_for('auth.register') }}">{{ _('Sign Up') }}</a></li>
+            {% else %}
+            <li><a class="inout" href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
+            <li><a class="inout" href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
+            <li><a class="inout" href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li>
+            <li><a class="inout" href="{{ url_for('main.index') }}">All Posts</a></li>
+          
+            {% endif %}
+        </ul>
+    </div>
+
+    {% block content %}
+        <div class="container">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            {% block app_content %}
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    <footer>
+        <h3>© 2020 CONNECT21</h3>
+        <p>Developed by Normandie Essig.</p>
+    </footer>
+</html>

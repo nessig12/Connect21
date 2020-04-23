@@ -1,32 +1,47 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="about " style="margin-left: 50px; margin-right: 50px;"> 
-	    <h1> About </h1>
-	    <h3> The App </h3>
-	    <table>
-	    	<tr> 
-	    		<td>  Built using Python and FLask, Connect21 is a web-based application to help connect those in the Down Syndrome Community. Users can create accounts, post to forums, and connect with others about topics that interest them. Popular forums include sports, tv shows, and more! </td>
-	    		<td>   <img src="{{url_for('static', filename='born-this-way.jpg')}}" alt="Young Adults with Down Syndrome" height="250" width="480" style="margin-left: 50px; margin-right: 50px"></td>
-	    	</tr>
-	    </table>
+	<div class="stuff">
+		<div class="textstuff">
+			<h1>Everyone deserves authentic friendships.</h1>
+			<h3>Our responsive web-based application helps individuals with Down Syndrome (age 18+) find friends at home or on the go, based off their interests.
+			</h3>
+			<p><br></p>
 
-	    <hr> 
+			<a href="#about" class="learn"> About Us</a> <a href="#theapp" class="learn"> The App </a> <a href="#project" class="learn"> The Project</a>
+		</div>
+	</div>
+	<div class="about" id="about">
+		<center>
+		<h1 style="color: #f06377; text-align: center;"> About Us </h1>
+		<img src="{{url_for('static', filename='madison.JPG')}}" alt="Madison and Normandie" width="450">
+		<p style="width:75%; text-align: center;"> My name is Normandie Essig and I have an older sister Madison who has Down Syndrome. Connect21 is an application help connect her and other young adults in the Down Syndrome community. </p>
+
+		 <p style="width:75%; text-align: center;">I am a senior studying Computer Science at Boston University. While at BU, I have been the President and captain of the Women's Squash Team, a member of Gamma Phi Beta sorority, a member of Upsilon Pi Epsilon Honor Society, and involved with Hillel. From Washington, D.C., I love playing squash, reading, and finding new ramen spots! </p>
+	     
+	     <p style="width:75%; text-align: center;"> After graduation, I will work as a consulting analyst at Accenture in Washington, D.C.</p>
+		</center>
+	</div>
+
+	<div class="theapp" id="theapp">
+		<table style="padding:150px;">
+			<colgroup>
+			    <col span="2" style="width:600px;" >
+			 </colgroup>
+			<tr>
+				<td>
+					<h1 style="color: white;"> The App </h1>
+				</td>
+				<td>
+					<p style="color: white;">Built using Python and FLask, Connect21 is a web-based application to help connect those in the Down Syndrome Community. Users can create accounts, post to forums, and connect with others about topics that interest them. Popular forums include sports, tv shows, and more! </p> 
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="project " id="project"style="margin: 75px; "> 
 	    <h3> The Project </h3>
 	    <p> Developed as a Keystone Project for the Kilachand Honors College at Boston University, Normandie Essig wanted to create a site to connect those in the Down Syndrome. Inspired by her sister who has Down Syndrome, Normandie researched what resources do exist for young adults, what their daily lives look like, the major safety concerns, and the effect of social technologies, such as Facebook, Twitter, and Reddit, to foster connections. From there, I created a web based application, named Connect21, that will act as a forum for users to connect with others through discussions around shared interests.
-	    <hr> 
-	    <h3> The Developer </h3>
-	    
-	    <table>
-	        <tr> 
-	            <td style="padding:20px;"> 
-	                <img src="{{url_for('static', filename='norm.jpg')}}" alt="Normandie Essig" height="200" width="150">
-	            </td>
-	            <td> 
-	                <p> Normandie Essig is a senior studying Computer Science at Boston University. While at BU, Normandie is the President and captain of the Women's Squash Team, a member of Gamma Phi Beta sorority, a member of Upsilon Pi Epsilon Honor Society, and involved with Hillel. From Washington, D.C., she loves playing squash, reading, and finding new ramen spots! </p>
-	                <p> After graduation, she will work as a consulting analyst at Accenture in Washington, D.C.</p>
-	            </td> 
-	        </tr>
-	    </table>
+	    </p>
     </div>
 {% endblock %}
