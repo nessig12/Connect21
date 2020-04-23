@@ -18,11 +18,16 @@ def before_request():
         db.session.commit()
     g.locale = str(get_locale())
 
-
 @bp.route('/', methods=['GET', 'POST'])
+@bp.route('/index', methods=['GET', 'POST'])
+@bp.route('/about', methods=['GET', 'POST'])
+def about():
+    return render_template('about.html', title=_('About'))
+
+
 @bp.route('/pages', methods=['GET', 'POST'])
 @login_required
-def index():
+def pages():
     form = PostForm()
     if form.validate_on_submit():
         language = guess_language(form.post.data)
@@ -44,12 +49,6 @@ def index():
     return render_template('index.html', title=_('Home'), form=form,
                            posts=posts.items, next_url=next_url,
                            prev_url=prev_url)
-
-@bp.route('/', methods=['GET', 'POST'])
-@bp.route('/index', methods=['GET', 'POST'])
-@bp.route('/about', methods=['GET', 'POST'])
-def about():
-    return render_template('about.html', title=_('About'))
 
 @bp.route('/explore')
 @bp.route('/explore', methods=['GET', 'POST'])

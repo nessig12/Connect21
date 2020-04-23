@@ -97,7 +97,7 @@
             <li><a class="inout" href="{{ url_for('auth.logout') }}">{{ _('Logout') }}</a></li>
             <li><a class="inout" href="{{ url_for('main.user', username=current_user.username) }}">{{ _('Profile') }}</a></li>
             <li><a class="inout" href="{{ url_for('main.explore') }}">{{ _('Explore') }}</a></li>
-            <li><a class="inout" href="{{ url_for('main.index') }}">All Posts</a></li>
+            <li><a class="inout" href="{{ url_for('main.pages') }}">All Posts</a></li>
           
             {% endif %}
         </ul>
