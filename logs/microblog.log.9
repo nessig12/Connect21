@@ -1,4 +1,4 @@
-2020-02-24 11:18:57,107 ERROR: Exception on /favicon.ico [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
+2020-02-24 11:23:36,724 ERROR: Exception on /favicon.ico [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Library/Python/3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
     rv = self.dispatch_request()
@@ -45,9 +45,12 @@ Traceback (most recent call last):
     <html{% block html_attribs %}{% endblock html_attribs %}>
   File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 11, in block "html"
     {%- endblock metas %}
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 12, in block "body"
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 17, in block "navbar"
-    <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 13, in block "body"
+    {%- block styles %}
+  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 48, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/errors/404.html", line 5, in block "app_content"
+    <p><a href="{{ url_for('index') }}">Back</a></p>
   File "/Library/Python/3.7/site-packages/flask/helpers.py", line 370, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "/Library/Python/3.7/site-packages/flask/app.py", line 2215, in handle_url_build_error
@@ -59,8 +62,8 @@ Traceback (most recent call last):
   File "/Library/Python/3.7/site-packages/werkzeug/routing.py", line 2020, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.index' instead?
-2020-02-24 11:20:03,260 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-24 11:20:08,603 ERROR: Exception on /auth/login [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
+2020-02-24 11:24:05,218 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
+2020-02-24 11:24:09,845 ERROR: Exception on /auth/login [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Library/Python/3.7/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -96,9 +99,12 @@ Traceback (most recent call last):
     <html{% block html_attribs %}{% endblock html_attribs %}>
   File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 11, in block "html"
     {%- endblock metas %}
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 12, in block "body"
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 17, in block "navbar"
-    <a class="navbar-brand" href="{{ url_for('index') }}">Microblog</a>
+  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 13, in block "body"
+    {%- block styles %}
+  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 48, in block "content"
+    {% block app_content %}{% endblock %}
+  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/auth/login.html", line 12, in block "app_content"
+    <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
   File "/Library/Python/3.7/site-packages/flask/helpers.py", line 370, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "/Library/Python/3.7/site-packages/flask/app.py", line 2215, in handle_url_build_error
@@ -109,4 +115,4 @@ Traceback (most recent call last):
     endpoint, values, method=method, force_external=external
   File "/Library/Python/3.7/site-packages/werkzeug/routing.py", line 2020, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'index'. Did you mean 'main.index' instead?
+werkzeug.routing.BuildError: Could not build url for endpoint 'register'. Did you mean 'auth.register' instead?

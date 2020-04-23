@@ -1,4 +1,4 @@
-2020-02-25 20:21:21,230 ERROR: Exception on /index [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
+2020-04-23 19:17:31,336 ERROR: Exception on /auth/reset_password_request [POST] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
 Traceback (most recent call last):
   File "/Library/Python/3.7/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -12,10 +12,40 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "/Library/Python/3.7/site-packages/flask/app.py", line 1935, in dispatch_request
     return self.view_functions[rule.endpoint](**req.view_args)
-  File "/Library/Python/3.7/site-packages/flask_login/utils.py", line 261, in decorated_view
-    return func(*args, **kwargs)
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/main/routes.py", line 46, in index
-    prev_url=prev_url)
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/auth/routes.py", line 61, in reset_password_request
+    send_password_reset_email(user)
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/auth/email.py", line 7, in send_password_reset_email
+    token = user.get_reset_password_token()
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/models.py", line 59, in get_reset_password_token
+    return jwt.encode(
+NameError: name 'jwt' is not defined
+2020-04-23 19:17:31,415 ERROR: Exception on /favicon.ico [GET] [in /Library/Python/3.7/site-packages/flask/app.py:1891]
+Traceback (most recent call last):
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1949, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1925, in dispatch_request
+    self.raise_routing_exception(req)
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1907, in raise_routing_exception
+    raise request.routing_exception
+  File "/Library/Python/3.7/site-packages/flask/ctx.py", line 350, in match_request
+    result = self.url_adapter.match(return_rule=True)
+  File "/Library/Python/3.7/site-packages/werkzeug/routing.py", line 1799, in match
+    raise NotFound()
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 2446, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1951, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1815, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "/Library/Python/3.7/site-packages/flask/app.py", line 1743, in handle_http_exception
+    return handler(e)
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/errors/handlers.py", line 8, in not_found_error
+    return render_template('errors/404.html'), 404
   File "/Library/Python/3.7/site-packages/flask/templating.py", line 140, in render_template
     ctx.app,
   File "/Library/Python/3.7/site-packages/flask/templating.py", line 120, in _render
@@ -26,24 +56,14 @@ Traceback (most recent call last):
     reraise(*rewrite_traceback_stack(source=source))
   File "/Library/Python/3.7/site-packages/jinja2/_compat.py", line 28, in reraise
     raise value.with_traceback(tb)
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/index.html", line 2, in top-level template code
-    {% import 'bootstrap/wtf.html' as wtf %}
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 1, in top-level template code
-    {% extends 'bootstrap/base.html' %}
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 1, in top-level template code
-    {% block doc -%}
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 3, in block "doc"
-    <html{% block html_attribs %}{% endblock html_attribs %}>
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 11, in block "html"
-    {%- endblock metas %}
-  File "/Users/normandieessig/Library/Python/3.7/lib/python/site-packages/flask_bootstrap/templates/bootstrap/base.html", line 13, in block "body"
-    {%- block styles %}
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/base.html", line 49, in block "content"
-    {% block app_content %}{% endblock %}
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/index.html", line 11, in block "app_content"
-    {% include '_post.html' %}
-  File "/Users/normandieessig/Desktop/Thesis/Practice/app/templates/_post.html", line 4, in top-level template code
-    <a href="{{ url_for('user', username=post.author.username) }}">
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/templates/errors/404.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/templates/base.html", line 106, in top-level template code
+    {% block content %}
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/templates/base.html", line 116, in block "content"
+    {% block app_content %}
+  File "/Users/normandieessig/Desktop/Thesis/Connect21/app/templates/errors/404.html", line 5, in block "app_content"
+    <p><a href="{{ url_for('main.index') }}">Back</a></p>
   File "/Library/Python/3.7/site-packages/flask/helpers.py", line 370, in url_for
     return appctx.app.handle_url_build_error(error, endpoint, values)
   File "/Library/Python/3.7/site-packages/flask/app.py", line 2215, in handle_url_build_error
@@ -54,25 +74,4 @@ Traceback (most recent call last):
     endpoint, values, method=method, force_external=external
   File "/Library/Python/3.7/site-packages/werkzeug/routing.py", line 2020, in build
     raise BuildError(endpoint, values, method, self)
-werkzeug.routing.BuildError: Could not build url for endpoint 'user' with values ['username']. Did you mean 'main.user' instead?
-2020-02-25 20:25:32,074 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-25 20:28:00,767 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-25 20:35:37,896 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-25 20:35:45,974 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-25 20:36:56,805 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-25 20:36:59,907 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-02-26 10:07:45,691 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-06 14:50:47,435 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:18:17,709 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:27:17,167 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:29:42,504 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:30:21,851 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:31:52,103 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:32:10,359 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-03-19 14:33:25,970 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Practice/app/__init__.py:74]
-2020-04-13 18:13:42,234 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:74]
-2020-04-13 18:14:32,494 INFO: Microblog startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:74]
-2020-04-19 23:50:58,488 INFO: Connect21 startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:75]
-2020-04-19 23:51:08,102 INFO: Connect21 startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:75]
-2020-04-19 23:52:16,744 INFO: Connect21 startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:75]
-2020-04-22 16:44:33,255 INFO: Connect21 startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:75]
+werkzeug.routing.BuildError: Could not build url for endpoint 'main.index'. Did you mean 'main.explore' instead?
