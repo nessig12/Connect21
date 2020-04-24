@@ -34,12 +34,12 @@ class PostForm(FlaskForm):
     tag = SelectField(u'Tags', choices=[('Sports','Sports'),('Life with Down Syndrome','Life with Down Syndrome'), ('TV Shows/Movies','TV Shows/Movies'),('Cooking','Cooking'), ('Funny Memes','Funny Memes'),('Puzzles','Puzzles'),('Scary Stories','Scary Stories'),('Politics','Politics'),('Dream Job','Dream Job')])
     submit = SubmitField(_l('Submit'))
 
-    def tag_help(request):
-        topic_choices = Topics.query.order_by('topic')
-        print("helooooooooooooo")
-        print(topic_choices)
-        form = PostForm(request.POST, obj=topic_choices)
-        form.tag.choices = [(g.id,g.topic) for g in Topics.query.order_by('topic')]
+    # def tag_help(request):
+    #     topic_choices = Topics.query.order_by('topic')
+    #     print("helooooooooooooo")
+    #     print(topic_choices)
+    #     form = PostForm(request.POST, obj=topic_choices)
+    #     form.tag.choices = [(g.id,g.topic) for g in Topics.query.order_by('topic')]
 
 # class UserDetails(Form):
 #     group_id = SelectField(u'Group')

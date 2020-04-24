@@ -26,7 +26,6 @@ babel = Babel()
 def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
-    app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 
     db.init_app(app)
     migrate.init_app(app, db)
