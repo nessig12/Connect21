@@ -29,8 +29,25 @@ class PostForm(FlaskForm):
     # topics = Topics.query.all()
     # for topic in topics: 
     #     choices += [topics.topic]
-    tag = SelectField(u'Tags', choices=[('Sports','Sports'),('Life with Down Syndrome','Life with Down Syndrome'), ('TV Shows/Movies','TV Shows/Movies'), ('Cooking','Cooking')])
+    #tag = SelectField(u'Topics')
+    #tag = SelectField(u'Tags', choices = [(g.id, g.topic) for g in Topics.query.order_by('topic')])
+    tag = SelectField(u'Tags', choices=[('Sports','Sports'),('Life with Down Syndrome','Life with Down Syndrome'), ('TV Shows/Movies','TV Shows/Movies'),('Cooking','Cooking'), ('Funny Memes','Funny Memes'),('Puzzles','Puzzles'),('Scary Stories','Scary Stories'),('Politics','Politics'),('Dream Job','Dream Job')])
     submit = SubmitField(_l('Submit'))
+
+    def tag_help(request):
+        topic_choices = Topics.query.order_by('topic')
+        print("helooooooooooooo")
+        print(topic_choices)
+        form = PostForm(request.POST, obj=topic_choices)
+        form.tag.choices = [(g.id,g.topic) for g in Topics.query.order_by('topic')]
+
+# class UserDetails(Form):
+#     group_id = SelectField(u'Group')
+
+#     def edit_user(request, id):
+#         topics = Topics.query.get(id)
+#         form = PostForm(request.POST, obj=topics)
+#         form.tag.choices = [(g.id, g.name) for g in Group.query.order_by('name')]
 
 class AddTopic(FlaskForm): 
     topic = StringField(_l('New Topic'), validators=[DataRequired()])

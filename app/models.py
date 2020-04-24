@@ -86,12 +86,17 @@ class Post(db.Model):
     def __repr__(self):
         return '<Post {}>'.format(self.body)
 
+    # def get_posts(self, topic):
+    #     return Post.query.filter_by(tag=topic).first()
+
+
 class Topics(db.Model): 
     id = db.Column(db.Integer, primary_key=True)
     topic = db.Column(db.String(50))
 
     def __repr__(self):
         return '<Topics {}>'.format(self.topic)
+
 
 @login.user_loader
 def load_user(id):
