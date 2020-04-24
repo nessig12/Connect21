@@ -9,6 +9,9 @@
         body{
             font-family: "Comic Sans MS", cursive, sans-serif;
         }
+        .explore a{
+            color: black;
+        }
         .inout {
             background: #f06377;
             border-radius: 25px;
@@ -21,19 +24,22 @@
             background-image:url({{ url_for('static', filename='gradient.jpg') }});
             padding: 15px;
         }
-        ul { 
+        .nav ul { 
             list-style-type: none;
             overflow: hidden;
             margin: 0;
             padding: 0;
         }
-        li a {
+        .nav li a {
           display: block;
           color: white;
           text-align: center;
           padding: 14px 16px;
           text-decoration: none;
-          float: left; 
+          float: right; 
+        }
+        .navleft{
+            float: left; 
         }
         .nav { 
             background-color: white;
@@ -88,8 +94,10 @@
 <body>
     <div class="nav">
         <ul>
-            <li><a href="{{ url_for('main.about') }}"><img src="{{url_for('static', filename='21.png')}}" alt="Connect21"></a></li>
-
+            <div class="navleft">
+                <li><a href="{{ url_for('main.about') }}"><img src="{{url_for('static', filename='21.png')}}" alt="Connect21"></a></li>
+            </div>
+            <div class="navright">
             {% if current_user.is_anonymous %}
             <li><a class="inout" href="{{ url_for('auth.login') }}">{{ _('Sign In') }}</a></li>
             <li><a class="inout" href="{{ url_for('auth.register') }}">{{ _('Sign Up') }}</a></li>
@@ -100,6 +108,7 @@
             <li><a class="inout" href="{{ url_for('main.pages') }}">All Posts</a></li>
           
             {% endif %}
+       
         </ul>
     </div>
 

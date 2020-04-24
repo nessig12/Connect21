@@ -75,3 +75,4 @@ Traceback (most recent call last):
   File "/Library/Python/3.7/site-packages/werkzeug/routing.py", line 2020, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.BuildError: Could not build url for endpoint 'main.index'. Did you mean 'main.explore' instead?
+2020-04-24 12:22:58,778 INFO: Connect21 startup [in /Users/normandieessig/Desktop/Thesis/Connect21/app/__init__.py:75]

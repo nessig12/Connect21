@@ -2,18 +2,31 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1 class="title"><br></h1>
-    <h1>{{ _('Hi, %(username)s!', username=current_user.username) }}</h1>
-    <h3> Community Topics</h3>
-    <!-- Code to go trough all the topic pages--> 
-    <ul> 
-    {% for topic in topics %}
-        
-        <li> <a href="{{ url_for('main.topic_page')}}">{{ topic.topic }}</a></li>
-    {% endfor %}
-    </ul>
+    <h1 class="title"> Community Topics<br></h1>
 
+    <table>
+    	<tr>
+    		<td>
+    			<h3> Explore the topics below and connect with others! Post, respond, and discuss in the spcific pages.</h3>
+    		</td>
+    		<td>
+    			 <p style="font-size: 11px"> <br><br>*All pages are monitored for innapropriate language or <br>for any activity that violates our policies. Safety is our <br>biggest concern and user's accounts will be put on hold for <br>any violations.</p>
+    		</td>
+    	</tr>
+    </table>
+   
+    <!-- Code to go trough all the topic pages--> 
+    <div class="explore">
+	    <ul> 
+	    {% for topic in topics %}
+	        
+	        <li> <a href="{{ url_for('main.topic_page')}}">{{ topic.topic }}</a></li>
+	    {% endfor %}
+	    </ul>
+	</div>
     <!-- add a new topic page --> 
+
+    <h3> If there is no page for something you want to discuss, add a new topic. </h3>
     {% if form1 %}
     {{ wtf.quick_form(form1) }}
     <br>
